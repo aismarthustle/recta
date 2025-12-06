@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { SignInCredentials } from '@/types/auth';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -34,7 +35,7 @@ const SignIn: React.FC = () => {
 
   const onSubmit = async (values: FormValues) => {
     setAuthError(null);
-    const success = await signIn(values);
+    const success = await signIn(values as SignInCredentials);
     if (success) {
       navigate('/');
     } else {
@@ -103,18 +104,17 @@ const SignIn: React.FC = () => {
               </form>
             </Form>
           </CardContent>
-        </CardContent>
-        <CardFooter className="flex flex-col justify-center space-y-2">
-          <p className="text-sm text-muted-foreground">
-            Don't have an account? <Link to="/signup" className="text-primary font-medium hover:underline">Sign Up</Link>
-          </p>
-          <p className="text-xs text-muted-foreground mt-4">
-            © {new Date().getFullYear()} Recta
-          </p>
-        </CardFooter>
-      </Card>
+          <CardFooter className="flex flex-col justify-center space-y-2">
+            <p className="text-sm text-muted-foreground">
+              Don't have an account? <Link to="/signup" className="text-primary font-medium hover:underline">Sign Up</Link>
+            </p>
+            <p className="text-xs text-muted-foreground mt-4">
+              © {new Date().getFullYear()} Recta
+            </p>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
-    </div >
   );
 };
 

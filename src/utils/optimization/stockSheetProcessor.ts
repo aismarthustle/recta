@@ -40,7 +40,7 @@ export const processStockSheet = (
   // If we placed any panels on this sheet, return a cut plan
   if (placements.length > 0) {
     // Calculate areas in square meters
-    const totalArea = stockSheet.length * stockSheet.width;
+    const totalArea = Number(stockSheet.length) * Number(stockSheet.width);
     const usedArea = placements.reduce((sum, placement) =>
       sum + placement.length * placement.width, 0);
     const wastedArea = totalArea - usedArea;
@@ -50,8 +50,8 @@ export const processStockSheet = (
       cutPlan: {
         stockSheetId: stockSheet.id,
         stockSheetDimensions: {
-          length: stockSheet.length,
-          width: stockSheet.width
+          length: Number(stockSheet.length),
+          width: Number(stockSheet.width)
         },
         placements,
         usedArea,

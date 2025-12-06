@@ -16,7 +16,6 @@ import { Progress } from "@/components/ui/progress";
 
 interface CuttingDiagramProps {
   onExport: (format: string) => void;
-  onExportPdf: () => void;
 }
 
 interface GroupedCutPlan {
@@ -95,7 +94,7 @@ const groupIdenticalCutPlans = (cutPlans: CutPlan[]): GroupedCutPlan[] => {
   });
 };
 
-const CuttingDiagram = ({ onExport, onExportPdf }: CuttingDiagramProps) => {
+const CuttingDiagram = ({ onExport }: CuttingDiagramProps) => {
   const { result, projectName } = useOptimization();
   const [scale, setScale] = useState(1);
   const [exporting, setExporting] = useState(false);

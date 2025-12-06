@@ -174,14 +174,14 @@ export const exportToPDF = async (projectId?: number) => {
 
   // Calculate total placements (panels) by summing up all placements across all sheets
   let totalPlacements = cutPlans.reduce((sum: number, plan: any) =>
-    sum + (plan.placements?.length || 0) * (plan.sheetCount || 1), 0);
+    sum + (plan.placements?.length || 0), 0);
   if (totalPanelsFromInput > 0) {
     totalPlacements = totalPanelsFromInput;
   }
 
   // Calculate total area of all sheets used
   let totalSheetsArea = cutPlans.reduce((sum: number, plan: any) =>
-    sum + (plan.stockSheetDimensions.length * plan.stockSheetDimensions.width * (plan.sheetCount || 1)), 0);
+    sum + (plan.stockSheetDimensions.length * plan.stockSheetDimensions.width), 0);
 
   // Group identical cut plans (reuse the logic from CuttingDiagram)
   // We'll inline a simple grouping by dimensions and placements pattern
@@ -203,11 +203,11 @@ export const exportToPDF = async (projectId?: number) => {
   cutPlans.forEach(plan => {
     const key = createCutPlanKey(plan);
     if (planGroups.has(key)) {
-      planGroups.get(key).count += plan.sheetCount || 1;
+      planGroups.get(key).count += 1;
     } else {
       planGroups.set(key, {
         cutPlan: plan,
-        count: plan.sheetCount || 1
+        count: 1
       });
     }
   });

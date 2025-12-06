@@ -31,11 +31,17 @@ export const tryPlacePanel = (
     adjustedWidth += 2 * edgeBandingInMeters;
   }
 
+  // Ensure stock sheet dimensions are numbers
+  const stockSheetDims = {
+    length: typeof stockSheet.length === 'string' ? Number(stockSheet.length) : stockSheet.length,
+    width: typeof stockSheet.width === 'string' ? Number(stockSheet.width) : stockSheet.width
+  };
+
   // Try without rotation first
   const normalPlacement = findBestPosition(
     adjustedLength,
     adjustedWidth,
-    stockSheet,
+    stockSheetDims,
     usedSpaces,
     options.kerfThickness
   );
@@ -59,8 +65,8 @@ export const tryPlacePanel = (
       panelId: panel.id,
       x: normalPlacement.x,
       y: normalPlacement.y,
-      width: panel.width,
-      length: panel.length,
+      width: Number(panel.width),
+      length: Number(panel.length),
       rotation: false,
       label: panel.label,
       color: panel.color || '#ccc'
@@ -83,7 +89,7 @@ export const tryPlacePanel = (
     const rotatedPlacement = findBestPosition(
       adjustedWidth,
       adjustedLength,
-      stockSheet,
+      stockSheetDims,
       usedSpaces,
       options.kerfThickness
     );
@@ -107,8 +113,8 @@ export const tryPlacePanel = (
         panelId: panel.id,
         x: rotatedPlacement.x,
         y: rotatedPlacement.y,
-        width: panel.width,
-        length: panel.length,
+        width: Number(panel.width),
+        length: Number(panel.length),
         rotation: true,
         label: panel.label,
         color: panel.color || '#ccc'

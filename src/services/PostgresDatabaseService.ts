@@ -14,14 +14,12 @@ class PostgresDatabaseService {
    */
   async getAllProjects(): Promise<{ id: number; name: string; createdAt: string; updatedAt: string }[]> {
     try {
-      const sql = `
+      const projects = await this.neonClient`
         SELECT id, name, created_at as "createdAt", updated_at as "updatedAt" 
         FROM projects 
         ORDER BY updated_at DESC
       `;
-      
-      const projects = await this.neonClient(sql);
-      return projects;
+      return projects as { id: number; name: string; createdAt: string; updatedAt: string }[];
     } catch (error) {
       console.error('Error fetching projects from PostgreSQL:', error);
       throw error;
@@ -33,11 +31,9 @@ class PostgresDatabaseService {
    */
   async getProjectById(id: number): Promise<ProjectData | null> {
     try {
-      const sql = `
-        SELECT * FROM projects WHERE id = $1
-      `;
-      
-      const result = await this.neonClient(sql, [id]);
+      const result = await this.neonClient`
+        SELECT * FROM projects WHERE id = ${id}
+      ` as any[];
       
       if (!result || result.length === 0) {
         return null;
@@ -69,21 +65,11 @@ class PostgresDatabaseService {
     try {
       const now = new Date().toISOString();
       
-      const sql = `
+      const result = await this.neonClient`
         INSERT INTO projects (name, panels, stock_sheets, options, result, created_at, updated_at)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        VALUES (${project.name}, ${JSON.stringify(project.panels)}, ${JSON.stringify(project.stockSheets)}, ${JSON.stringify(project.options)}, ${project.result ? JSON.stringify(project.result) : null}, ${now}, ${now})
         RETURNING id
       `;
-      
-      const result = await this.neonClient(sql, [
-        project.name,
-        JSON.stringify(project.panels),
-        JSON.stringify(project.stockSheets),
-        JSON.stringify(project.options),
-        project.result ? JSON.stringify(project.result) : null,
-        now,
-        now
-      ]);
       
       return result[0].id;
     } catch (error) {
@@ -99,21 +85,11 @@ class PostgresDatabaseService {
     try {
       const now = new Date().toISOString();
       
-      const sql = `
+      const result = await this.neonClient`
         UPDATE projects 
-        SET name = $1, panels = $2, stock_sheets = $3, options = $4, result = $5, updated_at = $6
-        WHERE id = $7
+        SET name = ${project.name}, panels = ${JSON.stringify(project.panels)}, stock_sheets = ${JSON.stringify(project.stockSheets)}, options = ${JSON.stringify(project.options)}, result = ${project.result ? JSON.stringify(project.result) : null}, updated_at = ${now}
+        WHERE id = ${id}
       `;
-      
-      const result = await this.neonClient(sql, [
-        project.name,
-        JSON.stringify(project.panels),
-        JSON.stringify(project.stockSheets),
-        JSON.stringify(project.options),
-        project.result ? JSON.stringify(project.result) : null,
-        now,
-        id
-      ]);
       
       return true;
     } catch (error) {
@@ -127,11 +103,9 @@ class PostgresDatabaseService {
    */
   async deleteProject(id: number): Promise<boolean> {
     try {
-      const sql = `
-        DELETE FROM projects WHERE id = $1
+      await this.neonClient`
+        DELETE FROM projects WHERE id = ${id}
       `;
-      
-      await this.neonClient(sql, [id]);
       return true;
     } catch (error) {
       console.error(`Error deleting project ${id} from PostgreSQL:`, error);
