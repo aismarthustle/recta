@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan de découpe - Export PDF</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+      color: #222;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 32px 40px 40px 40px;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+      margin-top: 0;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #eaeaea;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .stat-block {
+      background: #f4f6fa;
+      border-radius: 6px;
+      padding: 18px 24px;
+      min-width: 220px;
+      flex: 1 1 220px;
+      box-sizing: border-box;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-size: 22px;
+      font-weight: bold;
+      color: #1a6d3b;
+    }
+    .plans {
+      margin-top: 32px;
+    }
+    .plan {
+      margin-bottom: 48px;
+      page-break-inside: avoid;
+    }
+    .plan-header {
+      background: #e9f5ee;
+      border-radius: 5px 5px 0 0;
+      padding: 10px 18px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #217346;
+      border-bottom: 1px solid #d2e9dd;
+    }
+    .plan-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      background: #f8f8f8;
+      border-radius: 0 0 5px 5px;
+      padding: 18px;
+      border-bottom: 1px solid #eaeaea;
+    }
+    .plan-detail {
+      flex: 1 1 180px;
+      min-width: 180px;
+    }
+    .diagram {
+      margin: 18px 0 0 0;
+      text-align: center;
+    }
+    .diagram img, .diagram svg {
+      max-width: 100%;
+      max-height: 350px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background: #fff;
+    }
+    .footer {
+      text-align: right;
+      color: #aaa;
+      font-size: 12px;
+      margin-top: 40px;
+    }
+    @media print {
+      body {
+        background: #fff;
+      }
+      .container {
+        box-shadow: none;
+        margin: 0;
+        padding: 0 0 0 0;
+        max-width: 100%;
+      }
+      .plan {
+        page-break-inside: avoid;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 8px 40px;
+      }
+    }
+    .hidden-block {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Plan de découpe</h1>
+      <div class="date">Date : <span id="export-date">{{date}}</span></div>
+    </div>
+
+    <h2>Statistiques globales</h2>
+    <div class="stats">
+      <div class="stat-block">
+        <div class="stat-label">Plaques utilisées</div>
+        <div class="stat-value">{{totalSheets}}</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Efficacité</div>
+        <div class="stat-value">{{efficiency}}%</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Perte</div>
+        <div class="stat-value" style="color:#d32f2f">{{waste}}%</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Surface totale</div>
+        <div class="stat-value">{{totalSheetsArea}} m²</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Surface utilisée</div>
+        <div class="stat-value">{{totalUsedArea}} m²</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Surface perdue</div>
+        <div class="stat-value" style="color:#d32f2f">{{totalWastedArea}} m²</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Nombre total de panneaux</div>
+        <div class="stat-value">{{totalPlacements}}</div>
+      </div>
+      <div class="stat-block {{additionalSheetsNeededClass}}">
+        <div class="stat-label">Plaques supplémentaires nécessaires</div>
+        <div class="stat-value" style="color:#d32f2f">{{additionalSheetsNeeded}}</div>
+      </div>
+      <div class="stat-block {{unplacedPanelsCountClass}}">
+        <div class="stat-label">Découpes non placées</div>
+        <div class="stat-value" style="color:#d32f2f">{{unplacedPanelsCount}}</div>
+      </div>
+    </div>
+
+    <div class="plans">
+      <!-- Repeat for each grouped cut plan -->
+      {{#each groupedCutPlans}}
+      <div class="plan">
+        <div class="plan-header">
+          Plan {{planNumber}} / {{totalPlans}} &mdash; Dimensions: {{width}} m × {{length}} m &mdash; Nombre de plaques: {{count}}
+        </div>
+        <div class="plan-details">
+          <div class="plan-detail">
+            <strong>Surface de la plaque:</strong> {{sheetArea}} m²
+          </div>
+          <div class="plan-detail">
+            <strong>Surface totale utilisée:</strong> {{totalSheetArea}} m²
+          </div>
+          <div class="plan-detail">
+            <strong>Surface utilisée:</strong> {{usedArea}} m² ({{efficiency}}%)
+          </div>
+          <div class="plan-detail">
+            <strong>Surface perdue:</strong> <span style="color:#d32f2f">{{wastedArea}} m² ({{wastedPercentage}}%)</span>
+          </div>
+          <div class="plan-detail">
+            <strong>Nombre de panneaux:</strong> {{placements}}
+          </div>
+          <div class="plan-detail">
+            <strong>Nombre de coupes:</strong> {{totalCuts}}
+          </div>
+        </div>
+        <div class="diagram">
+          <!-- Insert SVG or image here -->
+          {{#if diagram}}
+            {{{diagram}}}
+          {{else}}
+            <div style="color:#aaa;font-style:italic;padding:40px 0;">Diagramme non disponible</div>
+          {{/if}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+    <div class="footer">
+      Généré par Coupe Optimale Maroc &mdash; {{date}}
+    </div>
+  </div>
+</body>
+</html> 

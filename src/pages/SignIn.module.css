@@ -1,0 +1,15 @@
+.backgroundContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url('/images/bg-marble.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.cardContainer {
+  width: 100%;
+  max-width: 28rem;
+  padding: 1rem;
+}

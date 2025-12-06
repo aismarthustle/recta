@@ -1,0 +1,37 @@
+/* Diagram component styles */
+
+.panel-gradient-overlay {
+  mix-blend-mode: multiply;
+}
+
+/* Container for the diagram to ensure proper sizing */
+.diagram-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: absolute;
+  inset: 0;
+  transform-origin: top left;
+  transition: transform 0.2s;
+}
+
+/* Ensure SVG fits within its container */
+.diagram-container svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Aspect ratio container for maintaining diagram proportions */
+.aspect-ratio-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Sticky diagram controls styling */
+.sticky {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  background-color: white;
+  z-index: 10;
+}

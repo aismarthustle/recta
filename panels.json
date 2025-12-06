@@ -1,0 +1,218 @@
+[
+  {
+    "id": "panel-1747823149095-1",
+    "color": "#ffc6ff",
+    "label": "Panel 1",
+    "width": 0.36,
+    "length": 1.25,
+    "quantity": 16
+  },
+  {
+    "id": "panel-1747823149095-2",
+    "color": "#ffd6a5",
+    "label": "Panel 2",
+    "width": 0.1,
+    "length": 1.25,
+    "quantity": 16
+  },
+  {
+    "id": "panel-1747823149095-3",
+    "color": "#ffc6ff",
+    "label": "panel 3",
+    "width": 0.06,
+    "length": 1.25,
+    "quantity": 16
+  },
+  {
+    "id": "panel-1747823149095-4",
+    "color": "#bdb2ff",
+    "label": "Panel 4",
+    "width": 0.1,
+    "length": 0.36,
+    "quantity": 16
+  },
+  {
+    "id": "panel-1747823149095-5",
+    "color": "#ffd6a5",
+    "label": "Panel 5",
+    "width": 1.3,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149095-6",
+    "color": "#ffd6a5",
+    "label": "Panel 6",
+    "width": 1.25,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149095-7",
+    "color": "#ffadad",
+    "label": "Panel 7",
+    "width": 0.1,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149095-8",
+    "color": "#bdb2ff",
+    "label": "Panel 8",
+    "width": 0.06,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149095-9",
+    "color": "#ffd6a5",
+    "label": "Panel 9",
+    "width": 0.12,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149095-10",
+    "color": "#bdb2ff",
+    "label": "Panel 10",
+    "width": 0.36,
+    "length": 1.24,
+    "quantity": 17
+  },
+  {
+    "id": "panel-1747823149095-11",
+    "color": "#9bf6ff",
+    "label": "Panel 11",
+    "width": 0.1,
+    "length": 1.24,
+    "quantity": 17
+  },
+  {
+    "id": "panel-1747823149095-12",
+    "color": "#bdb2ff",
+    "label": "Panel 12",
+    "width": 0.06,
+    "length": 1.24,
+    "quantity": 17
+  },
+  {
+    "id": "panel-1747823149095-13",
+    "color": "#a0c4ff",
+    "label": "Panel 13",
+    "width": 0.1,
+    "length": 0.36,
+    "quantity": 17
+  },
+  {
+    "id": "panel-1747823149096-14",
+    "color": "#a0c4ff",
+    "label": "Panel 14",
+    "width": 1.3,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149096-15",
+    "color": "#fdffb6",
+    "label": "Panel 15",
+    "width": 1.25,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149096-16",
+    "color": "#caffbf",
+    "label": "Panel 16",
+    "width": 0.1,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149096-17",
+    "color": "#fdffb6",
+    "label": "Panel 17",
+    "width": 0.06,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149096-18",
+    "color": "#a0c4ff",
+    "label": "Panel 18",
+    "width": 0.12,
+    "length": 1.25,
+    "quantity": 18
+  },
+  {
+    "id": "panel-1747823149096-19",
+    "color": "#fdffb6",
+    "label": "Panel 19",
+    "width": 0.36,
+    "length": 1.25,
+    "quantity": 18
+  },
+  {
+    "id": "panel-1747823149096-20",
+    "color": "#9bf6ff",
+    "label": "Panel 20",
+    "width": 0.1,
+    "length": 1.25,
+    "quantity": 18
+  },
+  {
+    "id": "panel-1747823149096-21",
+    "color": "#caffbf",
+    "label": "Panel 21",
+    "width": 0.06,
+    "length": 1.25,
+    "quantity": 18
+  },
+  {
+    "id": "panel-1747823149096-22",
+    "color": "#ffc6ff",
+    "label": "Panel 22",
+    "width": 0.1,
+    "length": 0.36,
+    "quantity": 18
+  },
+  {
+    "id": "panel-1747823149096-23",
+    "color": "#fdffb6",
+    "label": "Panel 23",
+    "width": 0.12,
+    "length": 1.25,
+    "quantity": 18
+  },
+  {
+    "id": "panel-1747823149096-24",
+    "color": "#a0c4ff",
+    "label": "Panel 24",
+    "width": 1.25,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149096-25",
+    "color": "#ffd6a5",
+    "label": "Panel 25",
+    "width": 1.3,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149096-26",
+    "color": "#fffffc",
+    "label": "Panel 26",
+    "width": 0.1,
+    "length": 1.25,
+    "quantity": 1
+  },
+  {
+    "id": "panel-1747823149096-27",
+    "color": "#ffc6ff",
+    "label": "Panel 27",
+    "width": 0.06,
+    "length": 1.25,
+    "quantity": 1
+  }
+]

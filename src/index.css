@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap');
+@import './styles/diagram.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 97%;
+    --foreground: 0 0% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 12%;
+
+    /* Industrial blue */
+    --primary: 211 90% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 0 0% 12%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8% 46%;
+
+    /* Machinery accent */
+    --accent: 196 100% 43%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 85%;
+    --input: 220 13% 85%;
+    --ring: 0 0% 12%;
+
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8rem;
+  }
+}
+
+/* Industrial theme overrides */
+.font-mono {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.industrial-shadow {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom sidebar styling */
+[data-sidebar="sidebar"] {
+  @apply bg-gray-100 border-gray-300;
+}
+
+/* Animations for processing */
+@keyframes pulse-bg {
+  0%, 100% {
+    background-color: rgba(15, 160, 206, 0.1);
+  }
+  50% {
+    background-color: rgba(15, 160, 206, 0.2);
+  }
+}
+
+.animate-pulse-bg {
+  animation: pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Input fields with measurement units */
+.input-with-unit {
+  @apply relative;
+}
+
+.input-with-unit input {
+  @apply pr-8;
+}
+
+.input-with-unit::after {
+  content: "m";
+  @apply absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm;
+}
+
+/* Diagram styling */
+.cut-diagram {
+  @apply bg-white border border-gray-300 shadow-sm rounded;
+}
+
+.panel-item {
+  @apply border border-gray-300 bg-gray-50 rounded p-2 text-xs hover:bg-gray-100;
+}
+
+.waste-area {
+  @apply fill-red-200 stroke-red-300;
+}
+
+/* Industrial form elements */
+input.industrial-input {
+  @apply bg-gray-100 border-gray-300 rounded-sm focus:ring-1 focus:ring-industrial-blue focus:border-industrial-blue text-xs;
+}
+
+.industrial-btn {
+  @apply font-medium text-xs tracking-wide;
+}
+
+/* Metal texture backgrounds */
+.metal-bg-light {
+  background-color: #f4f5f6;
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.5) 75%, transparent 75%, transparent);
+  background-size: 10px 10px;
+}
+
+.metal-bg-dark {
+  background-color: #222222;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+  background-size: 3px 3px;
+}
+
+/* Added for PDF export */
+.diagram-container-wrapper {
+  background: #fff;
+  padding: 16px; /* Adjust padding as needed */
+}
